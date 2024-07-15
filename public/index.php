@@ -3,15 +3,23 @@
 // This is where the database and table creations are done
 // As this is a small application, I have kept this part in index.php for ease
 // In case of large applications, I would prefer running the CreateDatabase script separately and not in index.php
-require_once '../src/CreateDatabase.php';
+require_once '../src/DatabaseSetup.php';
 
 use App\Phonebook\Phonebook;
 use App\RateLimitStorage;
+use App\DatabaseSetup;
 
-// make sure you have removed ; from session.auto_start in php.ini
 session_start();
 
-$db = getDbConnection();
+$host = $_ENV['DB_HOST'];
+$dbName = $_ENV['DB_NAME'];
+$username = $_ENV['DB_USER'];
+$password = $_ENV['DB_PASS'];
+
+$databaseSetup = new DatabaseSetup($host, $dbName, $username, $password);
+$databaseSetup->createDatabaseAndTable();
+$db = $databaseSetup->getDbConnection();
+
 $phonebook = new Phonebook($db);
 
 // Function to clean user input for security
