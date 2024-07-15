@@ -90,6 +90,7 @@ vendor/bin/phpunit tests/Phonebook/Unit/PhonebookTest.php
 - Rate limit:
 
   - For security reasons, only 100 requests per user are accepted in an hour.
+  - Please make sure you have removed ; from session.auto_start in php.ini for sessions to work.
 
 ## Other Application Features
 
