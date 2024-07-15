@@ -73,7 +73,9 @@ class Phonebook {
 
         // Constructing the SQL query dynamically using parameterized queries
         $likeClauses = [];
-        $likeClauses[] = "first_name LIKE ? OR last_name LIKE ?";
+        foreach ($possibleNames as $name) {
+            $likeClauses[] = "first_name LIKE ? OR last_name LIKE ?";
+        }
         $sql = "SELECT SQL_CALC_FOUND_ROWS * FROM contacts WHERE " . implode(' OR ', $likeClauses) . " LIMIT $pageLimit OFFSET $offset";
 
         $params = [];
