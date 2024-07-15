@@ -50,8 +50,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add'])) {
         echo "<div style='color: red;'>All fields are required.</div>";
     } elseif (!preg_match('/^[a-zA-Z]+$/', $lastName) || !preg_match('/^[a-zA-Z]+$/', $firstName)) {
         echo "<div style='color: red;'>Names must contain only alphabetic characters.</div>";
-    } elseif (!preg_match('/^[0-9*()-]*$/', $phoneNumber)) {
-        echo "<div style='color: red;'>Invalid phone number. Only numeric values and symbols '*', '-', '(', ')' are allowed.</div>";
+    } elseif (!preg_match('/^[0-9+()-]*$/', $phoneNumber)) {
+        echo "<div style='color: red;'>Invalid phone number. Only numeric values and symbols '+', '-', '(', ')' are allowed.</div>";
     } else {
         // If all validations pass, adding the contact
         $phonebook->addContact($lastName, $firstName, $phoneNumber);
@@ -122,7 +122,7 @@ if (isset($_GET['query'])) {
     <h2>Add Contact</h2>
     <label>Last Name: <input type="text" name="last_name" required></label><br>
     <label>First Name: <input type="text" name="first_name" required></label><br>
-    <label>Phone Number: <input type="text" name="phone_number" pattern="[0-9*()-]*" title="Only numbers and symbols '*', '-', '(', ')' are allowed" required></label><br>
+    <label>Phone Number: <input type="text" name="phone_number" pattern="[0-9+()-]*" title="Only numbers and symbols '+', '-', '(', ')' are allowed" required></label><br>
     <button type="submit" name="add">Add Contact</button>
 </form>
 
